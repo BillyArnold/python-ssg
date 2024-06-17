@@ -1,5 +1,7 @@
 import unittest
 from main import (
+    split_nodes_image,
+    split_nodes_link,
     split_nodes_delimiter,
     extract_markdown_links,
     extract_markdown_images,
@@ -7,6 +9,8 @@ from main import (
     text_type_bold,
     text_type_italic,
     text_type_code,
+    text_type_image,
+    text_type_link,
 )
 
 from textnode import TextNode
@@ -96,6 +100,21 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             matches,
         )
+    
+    def test_split_images(self):
+        matches = split_nodes_image([TextNode("This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)", text_type_text,)])
+        self.assertListEqual(
+            [
+                TextNode("This is text with an ", text_type_text),
+                TextNode("image", text_type_image, "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"),
+                TextNode(" and another ", text_type_text),
+                TextNode(
+                    "second image", text_type_image, "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png"
+                ),
+            ],
+            matches
+        )
+
 
 
 if __name__ == "__main__":
