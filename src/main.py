@@ -1,3 +1,4 @@
-from file_helpers import copy_directory
+from file_helpers import copy_directory, generatePage
 
 copy_directory('./static', './public')
+generatePage('./content/index.md', './template.html', './static/index.html')

@@ -7,7 +7,7 @@ from constants import (
     block_type_unordered_list
 )
 from parentnode import ParentNode
-from helpers import text_to_children
+from node_helpers import text_to_children
 
 def block_to_block_type(block):
     lines = block.split("\n")
