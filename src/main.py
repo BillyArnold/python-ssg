@@ -1,4 +1,5 @@
-from file_helpers import copy_directory, generatePage
+from file_helpers import copy_directory, generate_pages_recursive
+
 
 copy_directory('./static', './public')
-generatePage('./content/index.md', './template.html', './public/index.html')
+generate_pages_recursive('./content/', './template.html', './public/')
